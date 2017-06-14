@@ -57,10 +57,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
 
     editor.edit(video: video) { (editedVideo: Video?, tempPath: URL?) in
       DispatchQueue.main.async {
-        print(editedVideo)
         if let tempPath = tempPath {
-          let data = NSData(contentsOf: tempPath)
-          print(data?.length)
           let controller = AVPlayerViewController()
           controller.player = AVPlayer(url: tempPath)
 
@@ -81,7 +78,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
     let lightbox = LightboxController(images: images.map({ LightboxImage(image: $0) }), startIndex: 0)
     lightbox.dismissalDelegate = self
 
-    controller.dismiss(animated: true, completion: nil)
+    controller.present(lightbox, animated: true, completion: nil)
   }
 }
 
